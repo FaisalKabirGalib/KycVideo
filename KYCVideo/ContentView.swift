@@ -8,15 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+    @State private var showingCamera = false
+    @State private var cameraAuthorized = false
+        
+        var body: some View {
+            VStack {
+                Button("Take Photo") {
+                    checkCameraPermission { authorized in
+                        if authorized {
+                            self.showingCamera = true
+                        } else {
+                            // Handle the case where permission is denied
+                        }
+                    }
+                }
+            }
+            .sheet(isPresented: $showingCamera) {
+                CameraView()
+            }
         }
-        .padding()
-    }
 }
 
 #Preview {

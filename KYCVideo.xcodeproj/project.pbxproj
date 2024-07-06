@@ -11,6 +11,7 @@
 		390B614C2C3720270065BCED /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390B614B2C3720270065BCED /* ContentView.swift */; };
 		390B614E2C3720280065BCED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 390B614D2C3720280065BCED /* Assets.xcassets */; };
 		390B61512C3720290065BCED /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 390B61502C3720290065BCED /* Preview Assets.xcassets */; };
+		390B61592C3724BD0065BCED /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390B61582C3724BD0065BCED /* CameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,8 @@
 		390B614B2C3720270065BCED /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		390B614D2C3720280065BCED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		390B61502C3720290065BCED /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		390B61572C3720AD0065BCED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		390B61582C3724BD0065BCED /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +54,12 @@
 		390B61482C3720270065BCED /* KYCVideo */ = {
 			isa = PBXGroup;
 			children = (
+				390B61572C3720AD0065BCED /* Info.plist */,
 				390B61492C3720270065BCED /* KYCVideoApp.swift */,
 				390B614B2C3720270065BCED /* ContentView.swift */,
 				390B614D2C3720280065BCED /* Assets.xcassets */,
 				390B614F2C3720290065BCED /* Preview Content */,
+				390B61582C3724BD0065BCED /* CameraView.swift */,
 			);
 			path = KYCVideo;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				390B61592C3724BD0065BCED /* CameraView.swift in Sources */,
 				390B614C2C3720270065BCED /* ContentView.swift in Sources */,
 				390B614A2C3720270065BCED /* KYCVideoApp.swift in Sources */,
 			);
@@ -274,6 +280,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"KYCVideo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KYCVideo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera for video recording.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -302,6 +310,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"KYCVideo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KYCVideo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera for video recording.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
