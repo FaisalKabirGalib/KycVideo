@@ -11,17 +11,14 @@ import AVFoundation
 func checkCameraPermission(completion: @escaping (Bool) -> Void) {
     switch AVCaptureDevice.authorizationStatus(for: .video) {
     case .authorized:
-        // The user has previously granted access to the camera.
         completion(true)
     case .notDetermined:
-        // The user has not yet been asked for camera access.
         AVCaptureDevice.requestAccess(for: .video) { granted in
             DispatchQueue.main.async {
                 completion(granted)
             }
         }
     case .denied, .restricted:
-        // The user has previously denied access or access is restricted.
         completion(false)
     @unknown default:
         completion(false)
@@ -29,24 +26,38 @@ func checkCameraPermission(completion: @escaping (Bool) -> Void) {
 }
 
 struct CameraView: UIViewControllerRepresentable {
+    @Binding var isRecording: Bool
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-        
+    
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let picker = UIImagePickerController()
         picker.delegate = context.coordinator
         picker.sourceType = .camera
         picker.mediaTypes = ["public.movie"]
-        picker.videoMaximumDuration = 3 // Limit video to 3 seconds
-        picker.allowsEditing = false // No editing
-        picker.showsCameraControls = true // Use default camera controls
-        // Important: Disable audio capture
+        picker.videoMaximumDuration = 3
+        picker.allowsEditing = false
+        picker.showsCameraControls = false // Hide default camera controls
         picker.cameraCaptureMode = .video
+        
+        // Adding custom overlay
+        let overlay = UIHostingController(rootView: CameraOverlayView {
+            context.coordinator.startCapture(picker)
+        })
+        overlay.view.backgroundColor = .clear
+        overlay.view.frame = picker.view.frame
+        picker.cameraOverlayView = overlay.view
+        
         return picker
     }
     
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        if isRecording {
+            context.coordinator.startCapture(uiViewController)
+        }
+    }
     
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         var parent: CameraView
@@ -55,7 +66,13 @@ struct CameraView: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        func startCapture(_ picker: UIImagePickerController) {
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                picker.startVideoCapture()
+            }
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let videoURL = info[.mediaURL] as? URL {
                 print(videoURL)
                 uploadVideoToServer(fileURL: videoURL)
@@ -107,6 +124,25 @@ struct CameraView: UIViewControllerRepresentable {
     }
 }
 
-#Preview {
-    CameraView()
+struct CameraOverlayView: View {
+    var captureAction: () -> Void
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                Button(action: captureAction) {
+                    Text("Capture")
+                        .font(.title)
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                }
+                .padding(.bottom, 20)
+                Spacer()
+            }
+        }
+    }
 }

@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var showingCamera = false
-    @State private var cameraAuthorized = false
-        
-        var body: some View {
-            VStack {
-                Button("Take Photo") {
-                    checkCameraPermission { authorized in
-                        if authorized {
-                            self.showingCamera = true
-                        } else {
-                            // Handle the case where permission is denied
-                        }
-                    }
-                }
+    @State private var isRecording = false
+    
+    var body: some View {
+        VStack {
+            CameraView(isRecording: $isRecording)
+                .edgesIgnoringSafeArea(.all)
+            Button(action: {
+                isRecording.toggle()
+            }) {
+                Text(isRecording ? "Stop Recording" : "Start Recording")
+                    .font(.title)
+                    .padding()
+                    .background(isRecording ? Color.red : Color.green)
+                    .foregroundColor(.white)
+                    .clipShape(Circle())
             }
-            .sheet(isPresented: $showingCamera) {
-                CameraView()
-            }
+            .padding()
         }
+    }
 }
 
 #Preview {
