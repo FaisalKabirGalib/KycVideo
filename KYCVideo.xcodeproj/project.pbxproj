@@ -278,10 +278,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KYCVideo/Preview Content\"";
+				DEVELOPMENT_TEAM = JAT2J7CRMZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KYCVideo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera for video recording.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app need audio permission but not audio was not recording";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,10 +310,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"KYCVideo/Preview Content\"";
+				DEVELOPMENT_TEAM = JAT2J7CRMZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KYCVideo/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera for video recording.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app need audio permission but not audio was not recording";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
